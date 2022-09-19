@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MembroController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +23,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/users', [App\Http\Controllers\HomeController::class, 'usuarios'])->name('usuarios');
+
+
+Route::group([], function() {
+    Route::resource('membros', MembroController::class)->names('membros');
+});

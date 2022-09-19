@@ -1,9 +1,9 @@
 @extends('layouts.template')
 
-@section('title', 'Usuários')
+@section('title', 'Membros')
 
 @section('content_header')
-    <h1>Usuários</h1>
+    <h1>Membros</h1>
 @stop
 
 @section('content')
@@ -11,7 +11,7 @@
         <div class="col">
             <div class="card card-outline card-primary">
                 <div class="card-header">
-                    Tabela de Usuarios
+                    Tabela de Membros
                 </div>
                 <div class="card-body">
                     {!! $dataTable->table() !!}
