@@ -1,0 +1,79 @@
+@extends('layouts.template')
+
+@section('title', 'Membros')
+
+@section('content_header')
+    <h1>Membros</h1>
+@stop
+
+@section('content')
+    <div class="row">
+        <div class="col">
+            <div class="card card-outline card-primary">
+                <div class="card-header">
+                    Formulário
+                </div>
+                <div class="card-body">
+                    
+                    <div class="row">
+                        <div class="col">
+                            @if (!isset($membro))
+                            {!! Form::open(['url' => route('membros.store'), 'method' => 'POST']) !!}
+                            @else
+                            {!! Form::model($membro, ['url' => route('membros.update', $membro->id), 'method' => 'PUT']) !!}
+                            @endif
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        {!! Form::label('nome', 'Nome') !!}<span class="text-danger">*</span>
+                                        {!! Form::text('nome', null, ['class' => 'form-control', 'required'=>true, 'autocomplete' => 'off']) !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        {!! Form::label('nascimento', 'Data Nascimento') !!}
+                                        {!! Form::text('nascimento', null, ['class' => 'form-control isDateFormat', 'required'=>true, 'autocomplete' => 'off']) !!}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        {!! Form::label('sexo', 'Sexo') !!}<span class="text-danger">*</span>
+                                        {!! Form::select('sexo',['M' => 'Masculino', 'F' => 'Feminino'], null, ['class' => 'form-control', 'required'=>true, 'autocomplete' => 'off']) !!}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        {!! Form::label('telefone', 'Telefone') !!}<span class="text-danger">*</span>
+                                        {!! Form::text('telefone', null, ['class' => 'form-control isCelular', 'required'=>true, 'autocomplete' => 'off']) !!}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        {!! Form::label('ano_membresia', 'Membro desde') !!}<span class="text-danger">*</span>
+                                        {!! Form::text('ano_membresia', null, ['class' => 'form-control isAno', 'required'=>true, 'autocomplete' => 'off']) !!}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        {!! Form::label('cargo_id', 'Cargo') !!}<span class="text-danger">*</span>
+                                        {!! Form::select('cargo_id', $cargos, null, ['class' => 'form-control', 'placeholder' => '-', 'autocomplete' => 'off']) !!}
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <button class="btn btn-success"><i class='fas fa-save'></i> {{(isset($membro) ? 'Atualizar' : 'Cadastrar')}}</button>
+                            <a href="{{ route('membros.index') }}" class="btn btn-default" ><i class="fas fa-arrow-left"></i> Voltar</a>
+                            {!! Form::close() !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@stop
+

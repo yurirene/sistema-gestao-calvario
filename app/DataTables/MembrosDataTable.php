@@ -30,15 +30,15 @@ class MembrosDataTable extends DataTable
                 ]);
             })
             ->editColumn('nascimento', function($sql) {
-                return $sql->nascimento->diffInYears();
+                return Carbon::createFromFormat('d/m/Y', $sql->nascimento)->diffInYears();
             })
             ->editColumn('ano_membresia', function($sql) {
-                return $sql->ano_membresia->diffInYears();
+                return $sql->ano_membresia;
             })
             ->editColumn('cargo_id', function($sql) {
-                return $sql->cargo->titulo;
+                return $sql->cargo ? $sql->cargo->descricao : null;
             })
-            ->editColumn('create_at', function($sql) {
+            ->editColumn('created_at', function($sql) {
                 return $sql->created_at->format('d/m/Y H:i:s');
             });
     }

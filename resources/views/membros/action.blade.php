@@ -3,8 +3,7 @@
         Ações
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <button class="dropdown-item" href="#" onclick="confirmarPagamento('')">Depositado</button>
-        <button class="dropdown-item" data-toggle="modal" data-target="#modal-pendencia" data-id="{{$id}}" >Adicionar Pendência</button>
-
+        <a class="dropdown-item" href="{{ route($route.'.edit', $id) }}">Editar</a>
+        <button class="dropdown-item" href="#" onclick="deleteRegistro('{{ route($route.'.delete', $id) }}')">Apagar</button>
     </div>
 </div>

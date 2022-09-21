@@ -26,5 +26,6 @@ Route::get('/users', [App\Http\Controllers\HomeController::class, 'usuarios'])->
 
 
 Route::group([], function() {
-    Route::resource('membros', MembroController::class)->names('membros');
+    Route::resource('membros', MembroController::class)->names('membros')->except(['show', 'destroy']);
+    Route::get('membros/{membro}/delete', [ MembroController::class, 'delete'])->name('membros.delete');
 });
