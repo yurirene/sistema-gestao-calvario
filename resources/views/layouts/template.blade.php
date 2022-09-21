@@ -10,6 +10,16 @@
     .form-checkbox {
         height: 17px !important;
     }
+    .select2-selection__rendered {
+        line-height: 31px !important;
+    }
+    .select2-container .select2-selection--single {
+        height: 35px !important;
+    }
+    .select2-selection__arrow {
+        height: 34px !important;
+    }
+
 </style>
 
 @endsection
@@ -80,6 +90,11 @@ function deleteRegistro(url) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.html5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+
+    <link rel="stylesheet" href="/assets/js/fullcalendar/main.min.css">
+    <script src='/assets/js/fullcalendar/main.min.js'></script>
+    <script src='/assets/js/fullcalendar/main.global.min.js'></script>
+
     <script>
 
 

@@ -233,7 +233,7 @@ return [
         ],
         [
             'text' => 'Agenda',
-            'url'  => 'admin/settings',
+            'route'  => 'agendas.index',
             'icon' => 'fas fa-fw fa-lock',
         ],
 
