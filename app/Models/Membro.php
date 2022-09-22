@@ -22,4 +22,9 @@ class Membro extends Model
         return $this->belongsTo(Cargo::class);
     }
 
+    public function turma()
+    {
+        return $this->belongsToMany(Turma::class, 'membro_turma', 'membro_id', 'turma_id');
+    }
+
 }

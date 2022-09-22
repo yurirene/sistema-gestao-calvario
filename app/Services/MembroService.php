@@ -3,9 +3,28 @@
 namespace App\Services;
 
 use App\Models\Membro;
+use Illuminate\Support\Collection;
 
 class MembroService
 {
+
+    public static function getMembros() : Collection
+    {
+        try {
+            return Membro::all();
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public static function getMembrosToSelect() : array
+    {
+        try {
+            return Membro::all()->pluck('nome', 'id')->toArray();
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
     
     public static function store(array $request) : ?Membro
     {

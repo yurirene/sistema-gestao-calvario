@@ -19,7 +19,20 @@
     .select2-selection__arrow {
         height: 34px !important;
     }
-
+    
+  .fc-toolbar.fc-header-toolbar {
+    display: flex;
+    flex-direction: column;
+  }
+  .fc-toolbar.fc-header-toolbar .fc-left {
+    order: 3;
+  }
+  .fc-toolbar.fc-header-toolbar .fc-center {
+    order: 1;
+  }
+  .fc-toolbar.fc-header-toolbar .fc-right {
+    order: 2;
+  }
 </style>
 
 @endsection
@@ -94,6 +107,9 @@ function deleteRegistro(url) {
     <link rel="stylesheet" href="/assets/js/fullcalendar/main.min.css">
     <script src='/assets/js/fullcalendar/main.min.js'></script>
     <script src='/assets/js/fullcalendar/main.global.min.js'></script>
+
+
+    <script src='{{asset('assets/js/chartjs/chart.min.js')}}'></script>
 
     <script>
 

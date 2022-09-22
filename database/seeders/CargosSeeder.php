@@ -15,31 +15,42 @@ class CargosSeeder extends Seeder
     public function run()
     {
         $cargos = [
+
             [
                 'id' => 1,
+                'nome' => 'pastor',
+                'descricao' => 'Pastor',
+            ],
+            [
+                'id' => 2,
                 'nome' => 'presbitero',
                 'descricao' => 'Presbítero',
             ],
             [
-                'id' => 2,
+                'id' => 3,
                 'nome' => 'diacono',
                 'descricao' => 'Diácono'
             ],
             [
-                'id' => 3,
+                'id' => 4,
                 'nome' => 'diretoria-si',
                 'descricao' => 'Diretoria de Sociedade Interna'
             ],
             [
-                'id' => 4,
+                'id' => 5,
                 'nome' => 'lider-infantil',
                 'descricao' => 'Líder Ministério Infantil'
             ],
             [
-                'id' => 5,
+                'id' => 6,
                 'nome' => 'lider-louvor',
                 'descricao' => 'Líder Ministério de Louvor'
-            ]
+            ],
+            [
+                'id' => 7,
+                'nome' => 'professor-ebd',
+                'descricao' => 'Professor(a) da EBD'
+            ],
         ];
         try {
             

@@ -21,6 +21,8 @@ class CreateMembrosTable extends Migration
             $table->string('telefone')->nullable();
             $table->year('ano_membresia')->nullable();
             $table->bigInteger('cargo_id')->unsigned()->nullable();
+            $table->boolean('ativo')->default(true);
+            $table->date('inativado_em')->nullable();
             $table->timestamps();
 
             $table->foreign('cargo_id')->references('id')->on('cargos');

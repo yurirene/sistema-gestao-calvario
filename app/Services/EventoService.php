@@ -39,7 +39,6 @@ class EventoService
             return $evento;
         } catch (\Throwable $th) {
             DB::rollBack();
-            dd($th->getMessage());
             throw $th;
         }
     }
