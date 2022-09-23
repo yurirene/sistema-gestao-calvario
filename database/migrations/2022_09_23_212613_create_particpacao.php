@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMembroTurma extends Migration
+class CreateParticpacao extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateMembroTurma extends Migration
      */
     public function up()
     {
-        Schema::create('membro_turma', function (Blueprint $table) {
+        Schema::create('participacoes', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('membro_id')->unsigned();
-            $table->bigInteger('turma_id')->unsigned();
+            $table->bigInteger('programacao_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('membro_id')->references('id')->on('membros')->onDelete('cascade');
-            $table->foreign('turma_id')->references('id')->on('turmas')->onDelete('cascade');
+            $table->foreign('programacao_id')->references('id')->on('programacoes')->onDelete('cascade');
         });
     }
 
@@ -31,6 +31,6 @@ class CreateMembroTurma extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('membro_turma');
+        Schema::dropIfExists('participacoes');
     }
 }

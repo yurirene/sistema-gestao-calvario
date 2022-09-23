@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTurmasTable extends Migration
+class CreateProgramacaosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateTurmasTable extends Migration
      */
     public function up()
     {
-        Schema::create('turmas', function (Blueprint $table) {
+        Schema::create('programacoes', function (Blueprint $table) {
             $table->id();
+            $table->date('data');
             $table->string('nome');
-            $table->bigInteger('professor_id')->unsigned();
+            $table->integer('visitantes')->default(0);
             $table->timestamps();
-
-            $table->foreign('professor_id')->references('id')->on('membros')->onDelete('cascade');
         });
-        
     }
 
     /**
@@ -31,6 +29,6 @@ class CreateTurmasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('turmas');
+        Schema::dropIfExists('programacoes');
     }
 }

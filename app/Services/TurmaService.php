@@ -54,9 +54,10 @@ class TurmaService
         }
     }
 
-    public static function delete(Turma $turma) : void
+    public static function delete($turma) : void
     {
         try {
+            $turma = Turma::find($turma);
             $turma->delete();
         } catch (\Throwable $th) {
             throw $th;

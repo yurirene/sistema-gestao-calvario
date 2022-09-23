@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\UsersDataTable;
+use App\Services\HomeService;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,7 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('home', [
+            'totalizadores' => HomeService::totalizadores()
+        ]);
     }
 
     public function usuarios(UsersDataTable $dataTable)

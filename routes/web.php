@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\MembroController;
+use App\Http\Controllers\ProgramacaoController;
 use App\Http\Controllers\TurmaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -51,6 +52,11 @@ Route::group([], function() {
     
     Route::get('turmas/{model}/datatable-alunos', [ TurmaController::class, 'dataTableAlunos'])->name('turmas.alunos.datatable');
     Route::get('turmas/{model}/datatable-aulas', [ TurmaController::class, 'dataTableAulas'])->name('turmas.aulas.datatable');
+
+    
+    Route::resource('programacoes', ProgramacaoController::class)->parameter('programacoes', 'model')->names('programacoes')->except(['destroy']);
+    Route::get('programacoes/{model}/delete', [ ProgramacaoController::class, 'delete'])->name('programacoes.delete');
+
 
 
 });

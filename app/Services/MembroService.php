@@ -58,9 +58,10 @@ class MembroService
         }
     }
 
-    public static function delete(Membro $membro) : void
+    public static function delete($membro) : void
     {
         try {
+            $membro = Membro::find($membro);
             $membro->delete();
         } catch (\Throwable $th) {
             throw $th;

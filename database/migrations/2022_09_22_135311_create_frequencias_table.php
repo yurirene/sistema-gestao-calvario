@@ -19,8 +19,8 @@ class CreateFrequenciasTable extends Migration
             $table->bigInteger('aluno_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('aula_id')->references('id')->on('aulas');
-            $table->foreign('aluno_id')->references('id')->on('membros');
+            $table->foreign('aula_id')->references('id')->on('aulas')->onDelete('cascade');
+            $table->foreign('aluno_id')->references('id')->on('membros')->onDelete('cascade');
         });
     }
 

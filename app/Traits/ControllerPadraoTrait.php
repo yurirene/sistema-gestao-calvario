@@ -16,7 +16,11 @@ trait ControllerPadraoTrait {
         try {
             return $dataTable->render( $this->view . '.index');
         } catch (\Throwable $th) {
-
+            Log::error([
+                'erro' => $th->getMessage(),
+                'line' => $th->getLine(),
+                'file' => $th->getFile()
+            ]);
             return redirect()->back()->with([
                 'mensagem' => 'Erro ao Realizar Operação',
                 'status' => false
@@ -29,7 +33,11 @@ trait ControllerPadraoTrait {
         try {
             return view( $this->view . '.form', $this->paramsCreate);
         } catch (Throwable $th) {
-            Log::error($th);
+            Log::error([
+                'erro' => $th->getMessage(),
+                'line' => $th->getLine(),
+                'file' => $th->getFile()
+            ]);
             return redirect()->route('home')->withErrors(['Erro ao realizar essa operação.']);
         }
     }
@@ -43,6 +51,11 @@ trait ControllerPadraoTrait {
                 'status' => true
             ]);
         } catch (\Throwable $th) {
+            Log::error([
+                'erro' => $th->getMessage(),
+                'line' => $th->getLine(),
+                'file' => $th->getFile()
+            ]);
 
             return redirect()->back()->with([
                 'mensagem' => 'Erro ao Realizar Operação',
@@ -59,7 +72,11 @@ trait ControllerPadraoTrait {
             $params['model'] = $model;
             return view( $this->view . '.form', $params);
         } catch (Throwable $th) {
-            Log::error($th);
+            Log::error([
+                'erro' => $th->getMessage(),
+                'line' => $th->getLine(),
+                'file' => $th->getFile()
+            ]);
             return redirect()->route('home')->withErrors(['Erro ao realizar essa operação.']);
         }
     }
@@ -75,6 +92,11 @@ trait ControllerPadraoTrait {
             ]);
         } catch (\Throwable $th) {
 
+            Log::error([
+                'erro' => $th->getMessage(),
+                'line' => $th->getLine(),
+                'file' => $th->getFile()
+            ]);
             return redirect()->back()->with([
                 'mensagem' => 'Erro ao Realizar Operação',
                 'status' => false
@@ -92,6 +114,11 @@ trait ControllerPadraoTrait {
             ]);
         } catch (\Throwable $th) {
 
+            Log::error([
+                'erro' => $th->getMessage(),
+                'line' => $th->getLine(),
+                'file' => $th->getFile()
+            ]);
             return redirect()->back()->with([
                 'mensagem' => 'Erro ao Realizar Operação',
                 'status' => false

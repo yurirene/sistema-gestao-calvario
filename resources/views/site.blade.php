@@ -58,7 +58,7 @@
                             <li class="scroll-to-section"><a href="#sobre-nos">Nossa Igreja</a></li>
                             <li class="scroll-to-section"><a href="#departamento">Departamentos</a></li>
                             <li class="scroll-to-section"><a href="#contato">Endereço</a></li> 
-                            <li class="main-button"><a href="#">Restrito</a></li>
+                            <li class="main-button"><a href="{{ route('login') }}">Restrito</a></li>
                         </ul>        
                         <a class='menu-trigger'>
                             <span>Menu</span>

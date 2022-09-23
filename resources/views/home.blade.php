@@ -13,7 +13,7 @@
             <span class="info-box-icon"><i class="fas fa-users"></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">Nº de Membros</span>
-                <span class="info-box-number">410</span>
+                <span class="info-box-number">{{ $totalizadores['membros'] }}</span>
             </div>
         </div>
     </div>
@@ -22,7 +22,7 @@
             <span class="info-box-icon"><i class="fas fa-user-graduate"></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">Alunos EBD</span>
-                <span class="info-box-number">410</span>
+                <span class="info-box-number">{{ $totalizadores['alunos'] }}</span>
             </div>
         </div>
     </div>
@@ -81,30 +81,20 @@
         labels: labels,
         datasets: [
             {
-                label: '# of Votes',
+                label: 'Membros',
                 data: [12, 19, 3, 5, 2, 3],
                 borderWidth: 2,
                 borderRadius: 5,
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.9)',
                     'rgba(54, 162, 235, 0.9)',
-                    'rgba(255, 206, 86, 0.9)',
-                    'rgba(75, 192, 192, 0.9)',
-                    'rgba(153, 102, 255, 0.9)',
-                    'rgba(255, 159, 64, 0.9)'
                 ],
                 borderColor: [
-                    'rgba(255, 99, 132, 1)',
                     'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
                 ],
                 borderWidth: 1
             },
             {
-                label: 'Dataset 2',
+                label: 'Visitantes',
                 data: [5, 2, 12, 5, 5, 1],
                 backgroundColor: ['rgba(255, 99, 132, 0.9)'],
                 borderColor: ['rgba(255, 99, 132, 1)'],
@@ -124,7 +114,7 @@
                 },
                 title: {
                     display: true,
-                    text: 'Chart.js Combined Line/Bar Chart'
+                    text: 'Gráfico de Frequência de Membros e Visitantes'
                 }
                 }
             },

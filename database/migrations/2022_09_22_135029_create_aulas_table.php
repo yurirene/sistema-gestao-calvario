@@ -21,7 +21,7 @@ class CreateAulasTable extends Migration
             $table->date('data');
             $table->timestamps();
 
-            $table->foreign('turma_id')->references('id')->on('turmas');
+            $table->foreign('turma_id')->references('id')->on('turmas')->onDelete('cascade');
         });
     }
 
