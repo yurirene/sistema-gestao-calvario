@@ -1,9 +1,9 @@
 @extends('layouts.template')
 
-@section('title', 'Membros')
+@section('title', 'Turmas')
 
 @section('content_header')
-    <h1>Membros</h1>
+    <h1>Turmas</h1>
 @stop
 
 @section('content')
@@ -11,7 +11,7 @@
         <div class="col">
             <div class="card card-outline card-primary">
                 <div class="card-header">
-                    Tabela de Membros
+                    Tabela de Turmas
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">

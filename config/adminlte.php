@@ -227,80 +227,27 @@ return [
     'menu' => [
       
         [
-            'text' => 'Membros',
-            'route'  => 'membros.index',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'Agenda',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'text'        => 'Membros',
+            'route'       => 'membros.index',
+            'icon'        => 'fas fa-fw fa-user',
         ],
 
         [
-            'text'        => 'EBD',
-            'url'         => 'ebd',
-            'icon'        => 'fas fa-users',
+            'text'        => 'Turmas EBD',
+            'route'       => 'turmas.index',
+            'icon'        => 'fas fa-graduation-cap',
+        ],
+
+        [
+            'text'        => 'Pedidos',
+            'url'       => 'pedidos',
+            'icon'        => 'fas fa-pray',
         ],
 
         [
             'text'        => 'Usuários',
             'url'         => 'users',
             'icon'        => 'fas fa-users',
-        ],
-        [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
-        ],
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
         ],
     ],
 

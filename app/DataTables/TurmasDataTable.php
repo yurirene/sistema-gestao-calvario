@@ -2,16 +2,13 @@
 
 namespace App\DataTables;
 
-use App\Models\Membro;
-use App\Models\Membros;
+use App\Models\Turma;
 use Carbon\Carbon;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class MembrosDataTable extends DataTable
+class TurmasDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -24,22 +21,19 @@ class MembrosDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('action', function($sql) {
-                return view('membros.action', [
-                    'route' => 'membros',
+                return view('turmas.actions.action', [
+                    'route' => 'turmas',
                     'id' => $sql->id,
                 ]);
             })
-            ->editColumn('nascimento', function($sql) {
-                return Carbon::createFromFormat('d/m/Y', $sql->nascimento)->diffInYears();
+            ->editColumn('nome', function($sql) {
+                return $sql->nome;
             })
-            ->editColumn('ano_membresia', function($sql) {
-                return $sql->ano_membresia;
+            ->addColumn('alunos', function($sql) {
+                return $sql->alunos->count();
             })
-            ->editColumn('cargo_id', function($sql) {
-                return $sql->cargo ? $sql->cargo->descricao : null;
-            })
-            ->editColumn('created_at', function($sql) {
-                return $sql->created_at->format('d/m/Y H:i:s');
+            ->editColumn('professor_id', function($sql) {
+                return $sql->professor->nome;
             });
     }
 
@@ -49,7 +43,7 @@ class MembrosDataTable extends DataTable
      * @param \App\Models\Membro $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Membro $model)
+    public function query(Turma $model)
     {
         return $model->newQuery();
     }
@@ -62,7 +56,7 @@ class MembrosDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('membros-table')
+            ->setTableId('turma-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('Bfrtip')
@@ -86,12 +80,8 @@ class MembrosDataTable extends DataTable
                   ->width(60)
                   ->addClass('text-center'),
             Column::make('nome')->title('Nome'),
-            Column::make('nascimento')->title('Idade'),
-            Column::make('sexo')->title('Sexo'),
-            Column::make('telefone')->title('Telefone'),
-            Column::make('ano_membresia')->title('Membro desde'),
-            Column::make('cargo_id')->title('Cargo'),
-            Column::make('created_at')->title('Criado em'),
+            Column::make('professor_id')->title('Professor'),
+            Column::make('alunos')->title('Nº Alunos'),
         ];
     }
 

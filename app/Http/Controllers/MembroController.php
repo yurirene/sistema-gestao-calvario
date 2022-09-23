@@ -3,29 +3,36 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\MembrosDataTable;
+use App\Models\Membro;
+use App\Services\CargoService;
+use App\Services\MembroService;
+use App\Traits\ControllerPadraoTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class MembroController extends Controller
 {
-    
-    public function index(MembrosDataTable $dataTable)
+    use ControllerPadraoTrait;
+
+    protected $model;
+    protected $service;
+    protected $dataTable;
+    protected $paramsCreate;
+    protected $paramsEdit;
+    protected $view;
+
+    public function __construct() 
     {
-        try {
-            return $dataTable->render('membros.index', []);
-        } catch (Throwable $th) {
-            Log::error($th);
-            return redirect()->route('home')->withErrors(['Erro ao realizar essa operação.']);
-        }
-    }
-    public function create()
-    {
-        try {
-            return view('membros.form', []);
-        } catch (Throwable $th) {
-            Log::error($th);
-            return redirect()->route('home')->withErrors(['Erro ao realizar essa operação.']);
-        }
+        $this->model = Membro::class;
+        $this->service = MembroService::class;
+        $this->dataTable = MembrosDataTable::class;
+        $this->paramsCreate = [
+            'cargos' => CargoService::getCargosForSelect()
+        ];
+        $this->paramsEdit = [
+            'cargos' => CargoService::getCargosForSelect()
+        ];
+        $this->view = 'membros';
     }
 }
