@@ -4,6 +4,7 @@ use App\Http\Controllers\EventoController;
 use App\Http\Controllers\MembroController;
 use App\Http\Controllers\ProgramacaoController;
 use App\Http\Controllers\TurmaController;
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,13 +25,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/users', [App\Http\Controllers\HomeController::class, 'usuarios'])->name('usuarios');
 
+Route::group(['middleware' => 'auth'], function() {
 
-Route::group([], function() {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
     Route::resource('membros', MembroController::class)->parameter('membros', 'model')->names('membros')->except(['show', 'destroy']);
     Route::get('membros/{model}/delete', [ MembroController::class, 'delete'])->name('membros.delete');
+    Route::post('membros/importar', [ MembroController::class, 'importar'])->name('membros.importar');
 
     Route::get('eventos/', [EventoController::class, 'index'])->name('eventos.index');
     Route::post('eventos/', [EventoController::class, 'store'])->name('eventos.store');
@@ -58,5 +60,7 @@ Route::group([], function() {
     Route::get('programacoes/{model}/delete', [ ProgramacaoController::class, 'delete'])->name('programacoes.delete');
 
 
+    Route::resource('users', UsuarioController::class)->parameter('users', 'model')->names('usuarios')->except(['show', 'destroy']);
+    Route::get('users/{model}/delete', [ UsuarioController::class, 'delete'])->name('usuarios.delete');
 
 });

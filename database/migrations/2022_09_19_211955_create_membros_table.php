@@ -17,7 +17,7 @@ class CreateMembrosTable extends Migration
             $table->id();
             $table->string('nome');
             $table->date('nascimento')->nullable();
-            $table->char('sexo', 1);
+            $table->char('sexo', 1)->nullable();
             $table->string('telefone')->nullable();
             $table->year('ano_membresia')->nullable();
             $table->bigInteger('cargo_id')->unsigned()->nullable();

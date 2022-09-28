@@ -35,4 +35,21 @@ class MembroController extends Controller
         ];
         $this->view = 'membros';
     }
+
+    public function importar(Request $request)
+    {
+        try {
+            MembroService::importar($request);
+            return redirect()->route( $this->view . '.index')->with([
+                'mensagem' => 'Operação Realizada com Sucesso',
+                'status' => true
+            ]);
+        } catch (\Throwable $th) {
+            Log::error($th);
+            return redirect()->back()->with([
+                'mensagem' => 'Erro ao Realizar Operação',
+                'status' => false
+            ])->withInput();
+        }
+    }
 }

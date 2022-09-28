@@ -67,9 +67,21 @@ class MembrosDataTable extends DataTable
             ->minifiedAjax()
             ->dom('Bfrtip')
             ->orderBy(1)
-            ->buttons(
-                Button::make('create')->text('<i class="fas fa-plus"></i> Novo Registro'),
-            );
+            ->parameters([
+                'buttons' => [
+                    [
+                        'text' => '<i class="fas fa-plus"></i> Novo Registro',
+                        'className' => 'btn-novo-registro',
+                        'extend' => "create"
+                    ],
+                    [
+                        'text' => '<i class="fas fa-upload"></i> Importar Contatos',
+                        'action' => 'function() {
+                            $("#modal-import").modal("show");
+                        }'
+                    ],
+                ]
+            ]);
     }
 
     /**

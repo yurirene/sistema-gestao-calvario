@@ -22,7 +22,12 @@ class UsersDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'usersdatatable.action');
+            ->addColumn('action', function($sql) {
+                return view('usuarios.action', [
+                    'route' => 'usuarios',
+                    'id' => $sql->id,
+                ]);
+            });
     }
 
     /**
@@ -50,11 +55,7 @@ class UsersDataTable extends DataTable
                     ->dom('Bfrtip')
                     ->orderBy(1)
                     ->buttons(
-                        Button::make('create'),
-                        Button::make('export'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
+                        Button::make('create')->text('<i class="fas fa-plus"></i> Novo Registro'),
                     );
     }
 
@@ -71,10 +72,9 @@ class UsersDataTable extends DataTable
                   ->printable(false)
                   ->width(60)
                   ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('name'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('name')->title('Nome'),
+            Column::make('email')->title('E-mail'),
+            Column::make('created_at')->title('Criado em'),
         ];
     }
 
