@@ -26,7 +26,8 @@ class HomeController extends Controller
     public function index()
     {
         return view('home', [
-            'totalizadores' => HomeService::totalizadores()
+            'totalizadores' => HomeService::totalizadores(),
+            'grafico_frequencia' => HomeService::graficoFrequencia()
         ]);
     }
 

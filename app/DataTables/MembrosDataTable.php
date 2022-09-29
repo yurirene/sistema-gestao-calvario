@@ -66,7 +66,7 @@ class MembrosDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('Bfrtip')
-            ->orderBy(1)
+            ->orderBy(1, 'asc')
             ->parameters([
                 'buttons' => [
                     [

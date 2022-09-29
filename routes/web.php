@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EventoController;
+use App\Http\Controllers\FrequenciaController;
 use App\Http\Controllers\MembroController;
 use App\Http\Controllers\ProgramacaoController;
 use App\Http\Controllers\TurmaController;
@@ -62,5 +63,4 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::resource('users', UsuarioController::class)->parameter('users', 'model')->names('usuarios')->except(['show', 'destroy']);
     Route::get('users/{model}/delete', [ UsuarioController::class, 'delete'])->name('usuarios.delete');
-
 });

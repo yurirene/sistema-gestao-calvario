@@ -69,7 +69,6 @@ class ProgramacaoService
             return $programacao;
         } catch (Throwable $th) {
             DB::rollBack();
-            dd($th->getMessage());
             throw $th;
         }
     }

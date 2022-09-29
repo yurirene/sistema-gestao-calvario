@@ -45,12 +45,28 @@
                             <h5>Presentes</h5>
                             <div class="row mb-5">
                                 <div class="col-md-12">
-                                    @foreach($membros as $key => $membro)
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" name="membros[]" id="check{{$key}}" value="{{ $membro['id'] }}"  {{ $membro['presente'] ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="check{{$key}}">{{ $membro['nome'] }}</label>
+                                    <div class="row justify-content-center">
+                                        @foreach($membros as $key => $membro)
+                                        <div class="card col-md-3 mx-2 p-3">
+                                            <div class="form-check form-check-inline">
+                                                <input 
+                                                    class="form-check-input" 
+                                                    type="checkbox" 
+                                                    name="membros[]" 
+                                                    id="check{{$key}}" 
+                                                    value="{{ $membro['id'] }}"  
+                                                    data-toggle="toggle" 
+                                                    data-on="<i class='fa fa-check'></i>" 
+                                                    data-off="<i class='fa fa-times'></i>" 
+                                                    data-onstyle="success" 
+                                                    data-offstyle="danger"
+                                                    data-size="mini"
+                                                    {{ $membro['presente'] ? 'checked' : '' }}>
+                                                <label class="form-check-label ml-2" for="check{{$key}}">{{ $membro['nome'] }}</label>
+                                            </div>
+                                        </div>
+                                        @endforeach
                                     </div>
-                                    @endforeach
                                 </div>
                             </div>
                             <button class="btn btn-success"><i class='fas fa-save'></i> {{(isset($model) ? 'Atualizar' : 'Cadastrar')}}</button>

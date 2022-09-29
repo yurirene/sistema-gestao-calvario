@@ -73,39 +73,11 @@
     </script>
     <script>
         const ctx = document.getElementById('myChart').getContext('2d');
-        const DATA_COUNT = 7;
-        const NUMBER_CFG = {count: DATA_COUNT, min: -100, max: 100};
-
-        const labels =['A', 'B', 'C', 'D', 'E', 'F'];
-        const data = {
-        labels: labels,
-        datasets: [
-            {
-                label: 'Membros',
-                data: [12, 19, 3, 5, 2, 3],
-                borderWidth: 2,
-                borderRadius: 5,
-                backgroundColor: [
-                    'rgba(54, 162, 235, 0.9)',
-                ],
-                borderColor: [
-                    'rgba(54, 162, 235, 1)',
-                ],
-                borderWidth: 1
-            },
-            {
-                label: 'Visitantes',
-                data: [5, 2, 12, 5, 5, 1],
-                backgroundColor: ['rgba(255, 99, 132, 0.9)'],
-                borderColor: ['rgba(255, 99, 132, 1)'],
-                type: 'line',
-                order: 0
-            }
-        ]
-        };
+        
+        
         const config = {
             type: 'bar',
-            data: data,
+            data: @json($grafico_frequencia),
             options: {
                 responsive: true,
                 plugins: {
