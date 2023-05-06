@@ -80,7 +80,8 @@ class ProgramacoesDataTable extends DataTable
             Column::make('data')->title('Data'),
             Column::make('nome')->title('Nome'),
             Column::make('presentes')->title('Presentes'),
-            Column::make('visitantes')->title('Visitantes'),
+            Column::make('visitantes')->title('Visitantes (Adultos)'),
+            Column::make('visitantes_criancas')->title('Visitantes (Crianças)'),
             Column::make('created_at')->title('Criado em'),
         ];
     }

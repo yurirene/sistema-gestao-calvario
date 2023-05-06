@@ -32,36 +32,43 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         {!! Form::label('nascimento', 'Data Nascimento') !!}
-                                        {!! Form::text('nascimento', null, ['class' => 'form-control isDateFormat', 'required'=>true, 'autocomplete' => 'off']) !!}
+                                        {!! Form::text('nascimento', null, ['class' => 'form-control isDateFormat', 'required'=>false, 'autocomplete' => 'off']) !!}
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        {!! Form::label('sexo', 'Sexo') !!}<span class="text-danger">*</span>
+                                        {!! Form::label('sexo', 'Sexo') !!}
                                         {!! Form::select('sexo',['M' => 'Masculino', 'F' => 'Feminino'], null, ['class' => 'form-control', 'required'=>true, 'autocomplete' => 'off']) !!}
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        {!! Form::label('telefone', 'Telefone') !!}<span class="text-danger">*</span>
-                                        {!! Form::text('telefone', null, ['class' => 'form-control isCelular', 'required'=>true, 'autocomplete' => 'off']) !!}
+                                        {!! Form::label('telefone', 'Telefone') !!}
+                                        {!! Form::text('telefone', null, ['class' => 'form-control isCelular', 'required'=>false, 'autocomplete' => 'off']) !!}
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        {!! Form::label('ano_membresia', 'Membro desde') !!}<span class="text-danger">*</span>
-                                        {!! Form::text('ano_membresia', null, ['class' => 'form-control isAno', 'required'=>true, 'autocomplete' => 'off']) !!}
+                                        {!! Form::label('ano_membresia', 'Membro desde') !!}
+                                        {!! Form::text('ano_membresia', null, ['class' => 'form-control isAno', 'required'=>false, 'autocomplete' => 'off']) !!}
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        {!! Form::label('cargo_id', 'Cargo') !!}<span class="text-danger">*</span>
+                                        {!! Form::label('cargo_id', 'Cargo') !!}
                                         {!! Form::select('cargo_id', $cargos, null, ['class' => 'form-control', 'placeholder' => '-', 'autocomplete' => 'off']) !!}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        {!! Form::label('comungante', 'Comungante') !!} <br>
+                                        {!! Form::checkbox('comungante', 1); !!}
                                     </div>
                                 </div>
                                

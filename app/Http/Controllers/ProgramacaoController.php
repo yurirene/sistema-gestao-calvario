@@ -25,10 +25,12 @@ class ProgramacaoController extends Controller
         $this->service = ProgramacaoService::class;
         $this->dataTable = ProgramacoesDataTable::class;
         $this->paramsCreate = [
-            'membros' => $this->service::getMembrosToCheckbox()
+            'membros_comungantes' => $this->service::getMembrosToCheckbox(),
+            'membros_nao_comungantes' => $this->service::getMembrosNaoComungantesToCheckbox()
         ];
         $this->paramsEdit = [
-            'membros' => $this->service::getMembrosToCheckbox()
+            'membros_comungantes' => $this->service::getMembrosToCheckbox(),
+            'membros_nao_comungantes' => $this->service::getMembrosNaoComungantesToCheckbox()
         ];
         $this->view = 'programacoes';
     }

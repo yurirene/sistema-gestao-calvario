@@ -28,7 +28,8 @@ class HomeService
                         'nome' => $item->nome,
                         'data' => $item->data,
                         'presentes' => $item->presentes_count,
-                        'visitantes' => $item->visitantes
+                        'visitantes_adultos' => $item->visitantes,
+                        'visitantes_criancas' => $item->visitantes_criancas
                     ];
                 });
             $labels = $programacoes->pluck('data', 'nome')->map(function($key, $value) {
@@ -36,8 +37,8 @@ class HomeService
             })->values()->toArray();
             $dataSets = [];
             $dataSets[0] = [
-                'label' => 'Visitantes',
-                'data' => $programacoes->pluck('visitantes')->toArray(),
+                'label' => 'Membros',
+                'data' => $programacoes->pluck('presentes')->toArray(),
                 'borderWidth' => 2,
                 'borderRadius' => 5,
                 'backgroundColor' => [
@@ -49,12 +50,20 @@ class HomeService
                 'borderWidth' => 1
             ];
             $dataSets[1] = [
-                'label' => 'Membros',
-                'data' => $programacoes->pluck('presentes')->toArray(),
+                'label' => 'Visitantes (Crianças)',
+                'data' => $programacoes->pluck('visitantes_criancas')->toArray(),
                 'backgroundColor' => ['rgba(255, 99, 132, 0.9)'],
                 'borderColor' => ['rgba(255, 99, 132, 1)'],
                 'type' => 'line',
-                'order' => 0
+                'order' => 1
+            ];
+            $dataSets[2] = [
+                'label' => 'Visitantes',
+                'data' => $programacoes->pluck('visitantes_adultos')->toArray(),
+                'backgroundColor' => ['rgb(255, 191, 0)'],
+                'borderColor' => ['rgb(255, 191, 0)'],
+                'type' => 'line',
+                'order' => 2
             ];
 
             $data = [

@@ -12,7 +12,7 @@ class ProgramacaoService
     public static function getMembrosToCheckbox() : array
     {
         try {
-            $membros = Membro::all();
+            $membros = Membro::where('comungante', true)->orderBy('nome')->get();
             $retorno = [];
             $programacao = null;
             if(!is_null(request()->route('model'))) {
@@ -36,6 +36,34 @@ class ProgramacaoService
             throw $th;
         }
     }
+    public static function getMembrosNaoComungantesToCheckbox() : array
+    {
+        try {
+            $membros = Membro::where('comungante', false)->orderBy('nome')->get();
+            $retorno = [];
+            $programacao = null;
+            if(!is_null(request()->route('model'))) {
+                $programacao = Programacao::find(request()->route('model'));
+                $presentes = $programacao->presentes->pluck('id')->toArray();
+            }
+            foreach ($membros as $key => $membro) {
+                $retorno[$key] = [
+                    'id' => $membro->id,
+                    'nome' => $membro->nome,
+                    'presente' => false
+                ];
+                if ($programacao) {
+                    if (in_array($membro->id, $presentes)) {
+                        $retorno[$key]['presente'] = true; 
+                    }
+                }
+            }
+            return $retorno;
+        } catch (Throwable $th) {
+            throw $th;
+        }
+    }
+    
 
     public static function store(array $request) : ?Programacao
     {
@@ -44,7 +72,10 @@ class ProgramacaoService
             $programacao = Programacao::create([
                 'nome' => $request['nome'],
                 'data' => $request['data'],
-                'visitantes' => $request['visitantes']
+                'visitantes' => $request['visitantes'],
+                'visitantes_criancas' => $request['visitantes_criancas'] ?? 0,
+                'is_culto' => isset($request['is_culto']) ? true : false,
+                'nome_visitantes' => $request['nome_visitantes']
             ]);
             $programacao->presentes()->sync($request['membros']);
             DB::commit();
@@ -62,7 +93,10 @@ class ProgramacaoService
             $programacao->update([
                 'nome' => $request['nome'],
                 'data' => $request['data'],
-                'visitantes' => $request['visitantes']
+                'visitantes' => $request['visitantes'],
+                'visitantes_criancas' => $request['visitantes_criancas'],
+                'is_culto' => isset($request['is_culto']) ? true : false,
+                'nome_visitantes' => $request['nome_visitantes']
             ]);
             $programacao->presentes()->sync($request['membros']);
             DB::commit();
@@ -84,6 +118,22 @@ class ProgramacaoService
             return $programacao;
         } catch (Throwable $th) {
             DB::rollBack();
+            throw $th;
+        }
+    }
+    
+    public static function getFrequencia(Membro $membro)
+    {
+        try {
+            $qtdCulto = Programacao::where('is_culto', true)
+                ->whereYear('data', '>=', $membro->ano_membresia)
+                ->get()
+                ->count();
+            $qtdPresente = $membro->presencas()->where('is_culto', true)->count();
+            $porcentagem = round(($qtdPresente * 100) / $qtdCulto, 2);
+            return $porcentagem . "% (" . $qtdPresente . ")";
+        } catch (Throwable $th) {
+            dd($th->getMessage(), $th->getFile(), $th->getLine());
             throw $th;
         }
     }

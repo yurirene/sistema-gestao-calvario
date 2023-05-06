@@ -16,7 +16,7 @@ class MembroService
     public static function getMembros() : Collection
     {
         try {
-            return Membro::all();
+            return Membro::orderBy('nome')->get();
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -40,6 +40,7 @@ class MembroService
                 'sexo' => $request['sexo'],
                 'nascimento' => $request['nascimento'],
                 'ano_membresia' => $request['ano_membresia'],
+                'comungante' => isset($request['comungante']) ? true : false,
                 'cargo_id' => $request['cargo_id']
             ]);
         } catch (\Throwable $th) {
@@ -55,6 +56,7 @@ class MembroService
                 'sexo' => $request['sexo'],
                 'nascimento' => $request['nascimento'],
                 'ano_membresia' => $request['ano_membresia'],
+                'comungante' => isset($request['comungante']) ? true : false,
                 'cargo_id' => $request['cargo_id']
             ]);
             return $membro;

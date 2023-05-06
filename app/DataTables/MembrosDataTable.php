@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\Membro;
 use App\Models\Membros;
+use App\Services\ProgramacaoService;
 use Carbon\Carbon;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -38,8 +39,14 @@ class MembrosDataTable extends DataTable
             ->editColumn('cargo_id', function($sql) {
                 return $sql->cargo ? $sql->cargo->descricao : null;
             })
+            ->editColumn('comungante', function($sql) {
+                return $sql->comungante ? 'Sim' : 'Não';
+            })
             ->editColumn('created_at', function($sql) {
                 return $sql->created_at->format('d/m/Y H:i:s');
+            })
+            ->addColumn('frequencia', function($sql) {
+                return ProgramacaoService::getFrequencia($sql);
             });
     }
 
@@ -98,6 +105,8 @@ class MembrosDataTable extends DataTable
                   ->width(60)
                   ->addClass('text-center'),
             Column::make('nome')->title('Nome'),
+            Column::make('frequencia')->title('Frequência'),
+            Column::make('comungante')->title('Comungante'),
             Column::make('nascimento')->title('Idade'),
             Column::make('sexo')->title('Sexo'),
             Column::make('telefone')->title('Telefone'),

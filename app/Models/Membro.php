@@ -26,5 +26,11 @@ class Membro extends Model
     {
         return $this->belongsToMany(Turma::class, 'membro_turma', 'membro_id', 'turma_id');
     }
+    
+    public function presencas()
+    {
+        return $this->belongsToMany(Programacao::class, 'participacoes', 'membro_id', 'programacao_id');
+    }
+    
 
 }

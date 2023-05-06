@@ -1,9 +1,9 @@
 @extends('layouts.template')
 
-@section('title', 'Membros')
+@section('title', 'Presença em Programações')
 
 @section('content_header')
-    <h1>Membros</h1>
+    <h1>Presença em Programações</h1>
 @stop
 
 @section('content')
@@ -37,17 +37,64 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        {!! Form::label('visitantes', 'Visitantes') !!}
-                                        {!! Form::number('visitantes', null, ['class' => 'form-control', 'step' => '1', 'min' => '0', 'autocomplete' => 'off']) !!}
+                                        {!! Form::label('visitantes', 'Visitantes (Adultos)') !!}
+                                        {!! Form::number('visitantes', isset($model) ? null : 0, ['class' => 'form-control', 'step' => '1', 'min' => '0', 'autocomplete' => 'off']) !!}
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        {!! Form::label('visitantes_criancas', 'Visitantes (Crianças)') !!}
+                                        {!! Form::number('visitantes_criancas', isset($model) ? null : 0, ['class' => 'form-control', 'step' => '1', 'min' => '0', 'autocomplete' => 'off']) !!}
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        {!! Form::label('nome_visitantes', 'Nome dos Visitantes') !!}
+                                        {!! Form::textarea('nome_visitantes', null, ['class' => 'form-control', 'autocomplete' => 'off', 'rows' => 3]) !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="is_culto" class="form-check-input" id="culto" {{ isset($model) && $model->is_culto ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="culto">Culto Dominical</label>
+                                  </div>
+                                </div>
                             </div>
-                            <h5>Presentes</h5>
+                            <hr>
+                            <h5 class="mt-5">Presentes Comungantes</h5>
                             <div class="row mb-5">
                                 <div class="col-md-12">
                                     <div class="row justify-content-center">
-                                        @foreach($membros as $key => $membro)
-                                        <div class="card col-md-3 mx-2 p-3">
+                                        @foreach($membros_comungantes as $key => $membro)
+                                        <div class="card col-md-12 mx-2 p-3">
+                                            <div class="form-check form-check-inline">
+                                                <input 
+                                                    class="form-check-input" 
+                                                    type="checkbox" 
+                                                    name="membros[]" 
+                                                    id="check{{$key}}" 
+                                                    value="{{ $membro['id'] }}"  
+                                                    data-toggle="toggle" 
+                                                    data-on="<i class='fa fa-check'></i>" 
+                                                    data-off="<i class='fa fa-times'></i>" 
+                                                    data-onstyle="success" 
+                                                    data-offstyle="danger"
+                                                    data-size="mini"
+                                                    {{ $membro['presente'] ? 'checked' : '' }}>
+                                                <label class="form-check-label ml-2" for="check{{$key}}">{{ $membro['nome'] }}</label>
+                                            </div>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                            <h5>Presentes Não Comungantes</h5>
+                            <div class="row mb-5">
+                                <div class="col-md-12">
+                                    <div class="row justify-content-center">
+                                        @foreach($membros_nao_comungantes as $key => $membro)
+                                        <div class="card col-md-12 mx-2 p-3">
                                             <div class="form-check form-check-inline">
                                                 <input 
                                                     class="form-check-input" 

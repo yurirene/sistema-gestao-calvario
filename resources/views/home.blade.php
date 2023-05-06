@@ -34,7 +34,7 @@
                 Frequência
             </div>
             <div class="card-body">
-                <canvas id="myChart"></canvas>
+                <canvas id="myChart" height="400px;"></canvas>
             </div>
         </div>
     </div>
@@ -81,13 +81,24 @@
             options: {
                 responsive: true,
                 plugins: {
-                legend: {
-                    position: 'top',
-                },
-                title: {
-                    display: true,
-                    text: 'Gráfico de Frequência de Membros e Visitantes'
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Gráfico de Frequência de Membros e Visitantes'
+                    }
                 }
+            },
+            yAxis: {
+                min: 0,
+                max: 140,
+                tickInterval: 5,
+                lineColor: '#FF0000',
+                lineWidth: 1,
+                title: {
+                    text: 'Vassslues'
+    
                 }
             },
         };
