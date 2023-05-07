@@ -7,14 +7,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
-trait ControllerPadraoTrait {
-
-
+trait ControllerPadraoTrait
+{
     public function index()
     {
-        $dataTable = new $this->dataTable;
         try {
-            return $dataTable->render($this->view . '.index');
+            if (isset($this->dataTable)) {
+                $dataTable = new $this->dataTable;
+                return $dataTable->render($this->view . '.index');
+            }
+            return view($this->view . '.index', $this->paramsIndex ?: []);
         } catch (\Throwable $th) {
             Log::error([
                 'erro' => $th->getMessage(),

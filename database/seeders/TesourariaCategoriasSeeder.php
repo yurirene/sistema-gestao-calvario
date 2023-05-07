@@ -76,7 +76,7 @@ class TesourariaCategoriasSeeder extends Seeder
             foreach ($subcategorias as $key => $subcategoria) {
                 foreach ($subcategoria as $sub) {
                     TesourariaSubcategoria::updateOrCreate(
-                        ['id' => $key],
+                        ['nome' => $sub],
                         [
                             'nome' => $sub,
                             'categoria_id' => $key

@@ -33,6 +33,7 @@
     .fc-toolbar.fc-header-toolbar .fc-right {
         order: 2;
     }
+    .card-body-rolagem { height: 300px; overflow-x: scroll; width: 100%; }
 </style>
 
 @endsection
