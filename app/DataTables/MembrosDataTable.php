@@ -4,7 +4,7 @@ namespace App\DataTables;
 
 use App\Models\Membro;
 use App\Models\Membros;
-use App\Services\ProgramacaoService;
+use App\Services\FrequenciaService;
 use Carbon\Carbon;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -24,29 +24,29 @@ class MembrosDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', function($sql) {
+            ->addColumn('action', function ($sql) {
                 return view('membros.action', [
                     'route' => 'membros',
                     'id' => $sql->id,
                 ]);
             })
-            ->editColumn('nascimento', function($sql) {
+            ->editColumn('nascimento', function ($sql) {
                 return Carbon::createFromFormat('d/m/Y', $sql->nascimento)->diffInYears();
             })
-            ->editColumn('ano_membresia', function($sql) {
+            ->editColumn('ano_membresia', function ($sql) {
                 return $sql->ano_membresia;
             })
-            ->editColumn('cargo_id', function($sql) {
+            ->editColumn('cargo_id', function ($sql) {
                 return $sql->cargo ? $sql->cargo->descricao : null;
             })
-            ->editColumn('comungante', function($sql) {
+            ->editColumn('comungante', function ($sql) {
                 return $sql->comungante ? 'Sim' : 'Não';
             })
-            ->editColumn('created_at', function($sql) {
+            ->editColumn('created_at', function ($sql) {
                 return $sql->created_at->format('d/m/Y H:i:s');
             })
-            ->addColumn('frequencia', function($sql) {
-                return ProgramacaoService::getFrequencia($sql);
+            ->addColumn('frequencia', function ($sql) {
+                return FrequenciaService::getFrequencia($sql);
             });
     }
 

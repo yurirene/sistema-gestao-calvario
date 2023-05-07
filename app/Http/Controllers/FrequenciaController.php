@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\ProgramacoesDataTable;
+use App\DataTables\FrequenciaDataTable;
 use App\Models\Programacao;
-use App\Services\ProgramacaoService;
+use App\Services\FrequenciaService;
 use App\Traits\ControllerPadraoTrait;
 use Illuminate\Http\Request;
 
-class ProgramacaoController extends Controller
+class FrequenciaController extends Controller
 {
     use ControllerPadraoTrait;
 
@@ -19,11 +19,11 @@ class ProgramacaoController extends Controller
     protected $paramsEdit;
     protected $view;
 
-    public function __construct() 
+    public function __construct()
     {
         $this->model = Programacao::class;
-        $this->service = ProgramacaoService::class;
-        $this->dataTable = ProgramacoesDataTable::class;
+        $this->service = FrequenciaService::class;
+        $this->dataTable = FrequenciaDataTable::class;
         $this->paramsCreate = [
             'membros_comungantes' => $this->service::getMembrosToCheckbox(),
             'membros_nao_comungantes' => $this->service::getMembrosNaoComungantesToCheckbox()
@@ -32,6 +32,6 @@ class ProgramacaoController extends Controller
             'membros_comungantes' => $this->service::getMembrosToCheckbox(),
             'membros_nao_comungantes' => $this->service::getMembrosNaoComungantesToCheckbox()
         ];
-        $this->view = 'programacoes';
+        $this->view = 'frequencia-dominical';
     }
 }

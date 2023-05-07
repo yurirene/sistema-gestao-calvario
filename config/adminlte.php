@@ -225,23 +225,26 @@ return [
     */
 
     'menu' => [
-      
+
         [
             'text'        => 'Membros',
             'route'       => 'membros.index',
             'icon'        => 'fas fa-fw fa-user',
+            'can'         => 'membresia'
         ],
 
         [
             'text'        => 'Turmas EBD',
             'route'       => 'turmas.index',
             'icon'        => 'fas fa-graduation-cap',
+            'can'         => 'ebd'
         ],
 
         [
-            'text'        => 'Programações',
-            'route'       => 'programacoes.index',
+            'text'        => 'Frequência Cultos',
+            'route'       => 'frequencia-dominical.index',
             'icon'        => 'fas fa-calendar-alt',
+            'can'         => 'frequencia-dominical'
         ],
 
         // [
@@ -254,6 +257,23 @@ return [
             'text'        => 'Usuários',
             'url'         => 'users',
             'icon'        => 'fas fa-users',
+            'can'         => 'acessos'
+        ],
+
+        [
+            'text'        => 'Tesouraria',
+            'icon'        => 'fas fa-dollar-sign',
+            'can'         => 'acessos',
+            'submenu' => [
+                [
+                    'text' => 'Categorias',
+                    'route'  => 'area-tesouraria.categorias.index',
+                ],
+                [
+                    'text' => 'Movimentos',
+                    'route'  => 'area-tesouraria.movimentos.index',
+                ],
+            ],
         ],
     ],
 

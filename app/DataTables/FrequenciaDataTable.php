@@ -9,7 +9,7 @@ use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
-class ProgramacoesDataTable extends DataTable
+class FrequenciaDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -21,16 +21,16 @@ class ProgramacoesDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', function($sql) {
-                return view('programacoes.action', [
-                    'route' => 'programacoes',
+            ->addColumn('action', function ($sql) {
+                return view('frequencia-dominical.action', [
+                    'route' => 'frequencia-dominical',
                     'id' => $sql->id,
                 ]);
             })
-            ->addColumn('presentes', function($sql) {
+            ->addColumn('presentes', function ($sql) {
                 return $sql->presentes->count();
             })
-            ->editColumn('created_at', function($sql) {
+            ->editColumn('created_at', function ($sql) {
                 return $sql->created_at->format('d/m/Y H:i:s');
             });
     }

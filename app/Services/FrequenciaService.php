@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Services;
 
@@ -7,7 +7,7 @@ use App\Models\Programacao;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
-class ProgramacaoService
+class FrequenciaService
 {
     public static function getMembrosToCheckbox() : array
     {
@@ -15,7 +15,7 @@ class ProgramacaoService
             $membros = Membro::where('comungante', true)->orderBy('nome')->get();
             $retorno = [];
             $programacao = null;
-            if(!is_null(request()->route('model'))) {
+            if (!is_null(request()->route('model'))) {
                 $programacao = Programacao::find(request()->route('model'));
                 $presentes = $programacao->presentes->pluck('id')->toArray();
             }
@@ -25,10 +25,8 @@ class ProgramacaoService
                     'nome' => $membro->nome,
                     'presente' => false
                 ];
-                if ($programacao) {
-                    if (in_array($membro->id, $presentes)) {
-                        $retorno[$key]['presente'] = true; 
-                    }
+                if ($programacao && in_array($membro->id, $presentes)) {
+                    $retorno[$key]['presente'] = true;
                 }
             }
             return $retorno;
@@ -42,7 +40,7 @@ class ProgramacaoService
             $membros = Membro::where('comungante', false)->orderBy('nome')->get();
             $retorno = [];
             $programacao = null;
-            if(!is_null(request()->route('model'))) {
+            if (!is_null(request()->route('model'))) {
                 $programacao = Programacao::find(request()->route('model'));
                 $presentes = $programacao->presentes->pluck('id')->toArray();
             }
@@ -52,10 +50,8 @@ class ProgramacaoService
                     'nome' => $membro->nome,
                     'presente' => false
                 ];
-                if ($programacao) {
-                    if (in_array($membro->id, $presentes)) {
-                        $retorno[$key]['presente'] = true; 
-                    }
+                if ($programacao && in_array($membro->id, $presentes)) {
+                    $retorno[$key]['presente'] = true;
                 }
             }
             return $retorno;
@@ -63,7 +59,7 @@ class ProgramacaoService
             throw $th;
         }
     }
-    
+
 
     public static function store(array $request) : ?Programacao
     {
@@ -121,7 +117,7 @@ class ProgramacaoService
             throw $th;
         }
     }
-    
+
     public static function getFrequencia(Membro $membro)
     {
         try {
@@ -133,7 +129,6 @@ class ProgramacaoService
             $porcentagem = round(($qtdPresente * 100) / $qtdCulto, 2);
             return $porcentagem . "% (" . $qtdPresente . ")";
         } catch (Throwable $th) {
-            dd($th->getMessage(), $th->getFile(), $th->getLine());
             throw $th;
         }
     }

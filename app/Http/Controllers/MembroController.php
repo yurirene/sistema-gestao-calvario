@@ -22,7 +22,7 @@ class MembroController extends Controller
     protected $paramsEdit;
     protected $view;
 
-    public function __construct() 
+    public function __construct()
     {
         $this->model = Membro::class;
         $this->service = MembroService::class;

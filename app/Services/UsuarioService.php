@@ -1,10 +1,13 @@
-<?php 
+<?php
 
 namespace App\Services;
 
+use App\Models\Modulo;
 use App\Models\User;
+use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
+use Throwable;
 
 class UsuarioService
 {
@@ -63,4 +66,65 @@ class UsuarioService
             throw $th;
         }
     }
+
+    public static function trocarSenha(array $request): void
+    {
+        if (!Hash::check($request['senhaAntiga'], auth()->user()->password)) {
+            throw new Exception("Senha Incorreta", 418);
+        }
+        auth()->user()->update([
+            'password' => Hash::make($request['novaSenha'])
+        ]);
+    }
+
+    public static function syncPermissao(array $request): void
+    {
+        $usuario = User::find($request['user_id']);
+        $ativado = (bool) $request['ativado'];
+        $permissao = $usuario->permissao
+            ->pluck('id')
+            ->toArray();
+        if (
+            $ativado
+            && !in_array($request['modulo_id'], $permissao)
+        ) {
+            array_push($permissao, $request['modulo_id']);
+        }
+        if (
+            !$ativado
+            && in_array($request['modulo_id'], $permissao)
+        ) {
+            $key = array_search($request['modulo_id'], $permissao);
+            unset($permissao[$key]);
+        }
+        $usuario->permissao()->sync($permissao);
+    }
+
+
+    public static function getModulos(): array
+    {
+        $modulos = Modulo::get();
+        $usuario = null;
+        if (request()->route('model')) {
+            $usuario = User::find(request()->route('model'));
+            $permissao = $usuario->permissao()
+                ->get()
+                ->pluck('id')
+                ->toArray();
+
+        }
+        $retorno = [];
+        foreach ($modulos as $key => $modulo) {
+            $retorno[$key] = [
+                'id' => $modulo->id,
+                'nome' => $modulo->nome,
+                'ativo' => false
+            ];
+            if (!empty($permissao) && in_array($modulo->id, $permissao)) {
+                $retorno[$key]['ativo'] = true;
+            }
+        }
+        return $retorno;
+    }
+
 }

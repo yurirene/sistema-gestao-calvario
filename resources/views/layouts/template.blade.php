@@ -19,7 +19,7 @@
     .select2-selection__arrow {
         height: 34px !important;
     }
-    
+
     .fc-toolbar.fc-header-toolbar {
         display: flex;
         flex-direction: column;
@@ -66,14 +66,14 @@
 <script src="/assets/js/toggle/bootstrap-toggle.min.js"></script>
 
 <script>
-    
-    
+
+
     @if ($errors->any())
     @foreach($errors->all() as $error)
     toastr.error('{{ $error }}');
     @endforeach
     @endif
-    
+
     function deleteRegistro(url) {
         Swal.fire({
             title: 'Tem certeza?',
@@ -90,7 +90,7 @@
             }
         })
     }
-    
+
 </script>
 
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -116,31 +116,31 @@
 <script src='{{asset('assets/js/chartjs/chart.min.js')}}'></script>
 
 <script>
-    
-    
+
+
     $('.isSelect2Creatable').select2({
         tags: true
     });
-    
-    
+
+
     $('.isSelect2').select2({
         theme: "classic"
     });
-    
+
     $('.isMoney').mask('000,000,000', {reverse: true});
     $('.isDateFormat').mask('00/00/0000');
     $('.isCelular').mask('(00)00000-0000');
     $('.isAno').mask('0000');
-    
+
     $('.isMoneyConvert').mask('000,000,000,000.00', {reverse: true});
-    
+
     $('.isDate:not([readonly])').datepicker({
         language: "pt-BR",
         autoclose: true,
         todayHighlight: true,
         format: 'dd/mm/yyyy'
     });
-    
+
     // Mascara de CPF e CNPJ
     var CpfCnpjMaskBehavior = function (val) {
         return val.replace(/\D/g, '').length <= 11 ? '000.000.000-009' : '00.000.000/0000-00';
@@ -150,11 +150,11 @@
             field.mask(CpfCnpjMaskBehavior.apply({}, arguments), options);
         }
     };
-    
+
     $(function() {
         $('.cpfcnpj').mask(CpfCnpjMaskBehavior, cpfCnpjpOptions);
     })
-    
+
     $('.isDateRange').daterangepicker({
         autoUpdateInput: false,
         "locale": {

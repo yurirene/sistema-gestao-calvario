@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 namespace App\Traits;
@@ -9,12 +9,12 @@ use Throwable;
 
 trait ControllerPadraoTrait {
 
-    
+
     public function index()
     {
         $dataTable = new $this->dataTable;
         try {
-            return $dataTable->render( $this->view . '.index');
+            return $dataTable->render($this->view . '.index');
         } catch (\Throwable $th) {
             Log::error([
                 'erro' => $th->getMessage(),
