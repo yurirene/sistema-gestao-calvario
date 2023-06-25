@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Services;
 
@@ -22,15 +22,21 @@ class MembroService
         }
     }
 
-    public static function getMembrosToSelect() : array
+    public static function getMembrosToSelect(bool $somenteComungantes = false) : array
     {
         try {
-            return Membro::all()->pluck('nome', 'id')->toArray();
+            return Membro::when($somenteComungantes, function ($sql) {
+                return $sql->where('comungante', true);
+            })
+            ->orderBy('nome')
+            ->get()
+            ->pluck('nome', 'id')
+            ->toArray();
         } catch (\Throwable $th) {
             throw $th;
         }
     }
-    
+
     public static function store(array $request) : ?Membro
     {
         try {

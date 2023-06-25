@@ -21,10 +21,10 @@ class CreateTesourariaMovimentosTable extends Migration
             $table->tinyInteger('tipo')->comment('0: Saida | 1: Entrada');
             $table->string('path_comprovante')->nullable();
             $table->bigInteger('categoria_id')->unsigned();
-            $table->bigInteger('membro_id')->unsigned();
+            $table->bigInteger('membro_id')->unsigned()->nullable();
             $table->timestamps();
             $table->foreign('membro_id')->references('id')->on('membros');
-            $table->foreign('categoria_id')->references('id')->on('tesouraria_subcategorias');
+            $table->foreign('categoria_id')->references('id')->on('tesouraria_categorias');
         });
     }
 

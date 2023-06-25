@@ -14,7 +14,7 @@
                     Formulário
                 </div>
                 <div class="card-body">
-                    
+
                     <div class="row">
                         <div class="col">
                             @if (!isset($model))
@@ -71,7 +71,7 @@
                                         {!! Form::checkbox('comungante', 1); !!}
                                     </div>
                                 </div>
-                               
+
                             </div>
                             <button class="btn btn-success"><i class='fas fa-save'></i> {{(isset($model) ? 'Atualizar' : 'Cadastrar')}}</button>
                             <a href="{{ route('membros.index') }}" class="btn btn-default" ><i class="fas fa-arrow-left"></i> Voltar</a>

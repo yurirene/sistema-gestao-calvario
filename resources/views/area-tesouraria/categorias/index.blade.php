@@ -7,27 +7,32 @@
 @stop
 
 @section('content')
-<div class="row mb-3">
-    <div class="col">
-        <button class="btn btn-primary">
-            Nova Categoria
-        </button>
-    </div>
-</div>
 <div class="row">
-    @foreach($categorias as $categoria)
+    @foreach($tipos as $key => $tipo)
     <div class="col-md-6 mb-3">
         <div class="card card-outline card-primary h-100">
             <div class="card-header">
                 <div class=" d-flex justify-content-between align-items-center">
-                    {{$categoria['nome']}}
+                    {{$tipo}}
                     <div>
-                        <button class="btn btn-primary">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                        <button class="btn btn-danger">
-                            <i class="fas fa-trash"></i>
-                        </button>
+                        <div class="dropdown">
+                            <button class="btn btn-xs dropdown-toggle "
+                                type="button" data-toggle="dropdown" aria-expanded="false"
+                            >
+                                <i class="fas fa-cogs"></i>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                                <a class="dropdown-item"
+                                    data-toggle="modal"
+                                    data-target="#modalCadastro"
+                                    data-tipo="{{$key}}"
+                                    data-route="{{route('area-tesouraria.categorias.store')}}"
+                                >
+                                    Nova Categoria
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -35,25 +40,29 @@
                 <table class="table" aria-label="description">
                     <tr>
                         <th>#</th>
-                        <th>Subcategoria</th>
+                        <th>Categoria</th>
                     </tr>
-                    @foreach($categoria['subcategorias'] as $idSubcategoria => $nome)
+                    @foreach($categorias[$key] as $categoria)
                     <tr>
                         <td>
                             <div class="dropdown">
-                                <button class="btn btn-secondary btn-sm dropdown-toggle"
+                                <button class="btn btn-secondary btn-xs dropdown-toggle"
                                     type="button" data-toggle="dropdown" aria-expanded="false"
                                 >
                                     Ações
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item"
-                                        href="#">
+                                    <a class="dropdown-item" data-toggle="modal"
+                                        data-target="#modalEditar" href="#"
+                                        data-id="{{$categoria['id']}}"
+                                        data-nome="{{$categoria['nome']}}"
+                                        data-route="{{route('area-tesouraria.categorias.update', $categoria['id'])}}"
+                                    >
                                         Editar
                                     </a>
                                     <button class="dropdown-item" href="#"
                                         onclick="deleteRegistro(
-                                            '{{ route('area-tesouraria.subcategorias.delete', $idSubcategoria) }}'
+                                            '{{ route('area-tesouraria.categorias.delete', $categoria['id']) }}'
                                         )"
                                     >
                                         Apagar
@@ -61,7 +70,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td>{{ $nome }}</td>
+                        <td>{{ $categoria['nome'] }}</td>
                     </tr>
                     @endforeach
                 </table>
@@ -69,9 +78,6 @@
         </div>
     </div>
     @endforeach
-
 </div>
+@include('area-tesouraria.modal-editar')
 @stop
-@section('script_fim')
-
-@endsection

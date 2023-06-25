@@ -133,7 +133,7 @@
     $('.isCelular').mask('(00)00000-0000');
     $('.isAno').mask('0000');
 
-    $('.isMoneyConvert').mask('000,000,000,000.00', {reverse: true});
+    $('.isMoneyConvert').mask('000.000.000.000,00', {reverse: true});
 
     $('.isDate:not([readonly])').datepicker({
         language: "pt-BR",

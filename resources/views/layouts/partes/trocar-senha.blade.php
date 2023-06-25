@@ -26,7 +26,8 @@
                             {!! Form::label('senhaAntiga', 'Senha Antiga') !!}
                             {!! Form::password('senhaAntiga', [
                                     'class' => 'form-control',
-                                    'required' => 'required'
+                                    'required' => 'required',
+                                    'autocomplete' => 'off'
                             ]) !!}
                         </div>
                     </div>
@@ -37,7 +38,8 @@
                             {!! Form::label('novaSenha', 'Nova Senha') !!}
                             {!! Form::password('novaSenha', [
                                     'class' => 'form-control',
-                                    'required' => 'required'
+                                    'required' => 'required',
+                                    'autocomplete' => 'off'
                             ]) !!}
                         </div>
                     </div>

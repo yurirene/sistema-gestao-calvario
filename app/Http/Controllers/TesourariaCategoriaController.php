@@ -27,8 +27,28 @@ class TesourariaCategoriaController extends Controller
         $this->paramsCreate = [];
         $this->paramsEdit = [];
         $this->paramsIndex = [
-            'categorias' => $this->service::getCategoriasAndSubCategorias()
+            'categorias' => $this->service::getCategorias(),
+            'tipos' => $this->service::TIPOS
         ];
         $this->view = 'area-tesouraria.categorias';
+    }
+
+
+    public function getCategoriasToSelect($tipo)
+    {
+        try {
+            return response()->json(
+                [
+                    'data' => TesourariaCategoriaService::getCategoriaToSelect($tipo)
+                ],
+                200
+            );
+        } catch (\Throwable $th) {
+
+            return response()->json(
+                ['msg' => $th->getMessage()],
+                200
+            );
+        }
     }
 }

@@ -9,6 +9,9 @@ use Throwable;
 
 trait ControllerPadraoTrait
 {
+    private $mensagemErro = 'Erro ao realizar essa operação.';
+    private $mensagemSucesso = 'Operação Realizada com Sucesso.';
+
     public function index()
     {
         try {
@@ -24,7 +27,7 @@ trait ControllerPadraoTrait
                 'file' => $th->getFile()
             ]);
             return redirect()->back()->with([
-                'mensagem' => 'Erro ao Realizar Operação',
+                'mensagem' => $this->mensagemErro,
                 'status' => false
             ])->withInput();
         }
@@ -40,7 +43,7 @@ trait ControllerPadraoTrait
                 'line' => $th->getLine(),
                 'file' => $th->getFile()
             ]);
-            return redirect()->route('home')->withErrors(['Erro ao realizar essa operação.']);
+            return redirect()->route('home')->withErrors([$this->mensagemErro]);
         }
     }
 
@@ -49,7 +52,7 @@ trait ControllerPadraoTrait
         try {
             $this->service::store($request->all());
             return redirect()->route( $this->view . '.index')->with([
-                'mensagem' => 'Operação Realizada com Sucesso',
+                'mensagem' => $this->mensagemSucesso,
                 'status' => true
             ]);
         } catch (\Throwable $th) {
@@ -60,7 +63,7 @@ trait ControllerPadraoTrait
             ]);
 
             return redirect()->back()->with([
-                'mensagem' => 'Erro ao Realizar Operação',
+                'mensagem' => $th->getCode() == 418 ? $th->getMessage() : $this->mensagemErro,
                 'status' => false
             ])->withInput();
         }
@@ -79,7 +82,7 @@ trait ControllerPadraoTrait
                 'line' => $th->getLine(),
                 'file' => $th->getFile()
             ]);
-            return redirect()->route('home')->withErrors(['Erro ao realizar essa operação.']);
+            return redirect()->route('home')->withErrors([$this->mensagemErro]);
         }
     }
 
@@ -88,8 +91,8 @@ trait ControllerPadraoTrait
         try {
             $model = $this->model::find($model);
             $this->service::update($request->all(), $model);
-            return redirect()->route( $this->view . '.index')->with([
-                'mensagem' => 'Operação Realizada com Sucesso',
+            return redirect()->route($this->view . '.index')->with([
+                'mensagem' => $this->mensagemSucesso,
                 'status' => true
             ]);
         } catch (\Throwable $th) {
@@ -100,7 +103,7 @@ trait ControllerPadraoTrait
                 'file' => $th->getFile()
             ]);
             return redirect()->back()->with([
-                'mensagem' => 'Erro ao Realizar Operação',
+                'mensagem' => $th->getCode() == 418 ? $th->getMessage() : $this->mensagemErro,
                 'status' => false
             ])->withInput();
         }
@@ -110,8 +113,8 @@ trait ControllerPadraoTrait
     {
         try {
             $this->service::delete($model);
-            return redirect()->route( $this->view . '.index')->with([
-                'mensagem' => 'Operação Realizada com Sucesso',
+            return redirect()->route($this->view . '.index')->with([
+                'mensagem' => $this->mensagemSucesso,
                 'status' => true
             ]);
         } catch (\Throwable $th) {
@@ -122,7 +125,7 @@ trait ControllerPadraoTrait
                 'file' => $th->getFile()
             ]);
             return redirect()->back()->with([
-                'mensagem' => 'Erro ao Realizar Operação',
+                'mensagem' => $th->getCode() == 418 ? $th->getMessage() : $this->mensagemErro,
                 'status' => false
             ])->withInput();
         }

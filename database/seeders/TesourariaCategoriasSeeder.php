@@ -17,15 +17,12 @@ class TesourariaCategoriasSeeder extends Seeder
      */
     public function run()
     {
-        $categorias = [
-            1 => 'Despesas Fixas',
-            2 => 'Despesas Variáveis',
-            3 => 'Entradas'
-        ];
+        $ENTRADA = 1;
+        $SAIDA = 0;
 
-        $subcategorias = [
+        $dados = [
 
-            1 => [
+            $SAIDA => [
                 'CONTA DE ÁGUA',
                 'CONTA DE ENERGIA ELÉTRICA',
                 'CONTA DE INTERNET',
@@ -42,8 +39,6 @@ class TesourariaCategoriasSeeder extends Seeder
                 'ZELADORIA',
                 'REPASSE AO PRESBITÉRIO - 5% DÍZIMOS',
                 'REPASSE AO SUPREMO CONCÍLIO',
-            ],
-            2 => [
                 'ÁGUA MINERAL - GARRAFÕES',
                 'AJUDA DE CUSTO',
                 'ASSISTÊNCIA AOS IRMÃOS',
@@ -60,7 +55,7 @@ class TesourariaCategoriasSeeder extends Seeder
                 'ANIVERSÁRIO DA IGREJA',
                 'CONFRATERNIZAÇÃO IGREJA'
             ],
-            3 => [
+            $ENTRADA => [
                 'DÍZIMOS',
                 'OFERTAS'
             ]
@@ -69,21 +64,15 @@ class TesourariaCategoriasSeeder extends Seeder
         DB::beginTransaction();
         try {
 
-            foreach ($categorias as $key => $categoria) {
-                TesourariaCategoria::updateOrCreate(['id' => $key], ['nome' => $categoria]);
-            }
-
-            foreach ($subcategorias as $key => $subcategoria) {
-                foreach ($subcategoria as $sub) {
-                    TesourariaSubcategoria::updateOrCreate(
-                        ['nome' => $sub],
-                        [
-                            'nome' => $sub,
-                            'categoria_id' => $key
-                        ]
-                    );
+            foreach ($dados as $tipo => $categorias) {
+                foreach ($categorias as $categoria) {
+                    TesourariaCategoria::updateOrCreate(['nome' => $categoria], [
+                        'nome' => $categoria,
+                        'tipo' => $tipo
+                    ]);
                 }
             }
+
             DB::commit();
             return true;
         } catch (Exception $e) {

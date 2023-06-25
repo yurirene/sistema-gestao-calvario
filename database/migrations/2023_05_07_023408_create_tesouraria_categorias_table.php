@@ -16,6 +16,7 @@ class CreateTesourariaCategoriasTable extends Migration
         Schema::create('tesouraria_categorias', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
+            $table->tinyInteger('tipo');
             $table->timestamps();
         });
     }

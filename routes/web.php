@@ -126,26 +126,26 @@ Route::group([
     'as' => 'area-tesouraria.',
     'prefix' => 'area-tesouraria'
 ], function () {
+
     Route::resource('categorias', TesourariaCategoriaController::class)
         ->parameter('categorias', 'model')
         ->names('categorias')
         ->except(['show', 'destroy', 'create', 'edit']);
     Route::get('categorias/{model}/delete', [TesourariaCategoriaController::class, 'delete'])
         ->name('categorias.delete');
-
-    Route::resource('subcategorias', TesourariaSubCategoriaController::class)
-        ->parameter('subcategorias', 'model')
-        ->names('subcategorias')
-        ->except(['show', 'destroy', 'create', 'edit']);
-    Route::get('subcategorias/{model}/delete', [TesourariaSubCategoriaController::class, 'delete'])
-        ->name('subcategorias.delete');
+    Route::get('movimentos/get-categorias/{tipo}', [TesourariaCategoriaController::class, 'getCategoriasToSelect'])
+        ->name('categorias.get-categoria');
 
     Route::resource('movimentos', TesourariaMovimentoController::class)
         ->parameter('movimentos', 'model')
         ->names('movimentos')
-        ->except(['show', 'destroy', 'create', 'edit']);
+        ->except(['show', 'destroy']);
+
     Route::get('movimentos/{model}/delete', [TesourariaMovimentoController::class, 'delete'])
         ->name('movimentos.delete');
+
+
+
 });
 
 // Route::group(['middleware' => ['auth'], 'modulo' => 'tesouraria'], function () {
