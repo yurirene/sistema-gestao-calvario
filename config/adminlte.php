@@ -263,7 +263,7 @@ return [
         [
             'text'        => 'Tesouraria',
             'icon'        => 'fas fa-dollar-sign',
-            'can'         => 'acessos',
+            'can'         => 'area-tesouraria',
             'submenu' => [
                 [
                     'text' => 'Categorias',
@@ -274,6 +274,13 @@ return [
                     'route'  => 'area-tesouraria.movimentos.index',
                 ],
             ],
+        ],
+
+        [
+            'text'        => 'Relatórios',
+            'icon'        => 'fas fa-file',
+            'can'         => 'relatorios',
+            'url'         => 'relatorios',
         ],
     ],
 

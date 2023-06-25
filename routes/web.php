@@ -4,6 +4,7 @@ use App\Http\Controllers\EventoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MembroController;
 use App\Http\Controllers\FrequenciaController;
+use App\Http\Controllers\RelatorioController;
 use App\Http\Controllers\TesourariaCategoriaController;
 use App\Http\Controllers\TesourariaMovimentoController;
 use App\Http\Controllers\TesourariaSubCategoriaController;
@@ -146,6 +147,22 @@ Route::group([
 
 
 
+});
+
+Route::group([
+    'middleware' => ['auth'],
+    'modulo' => 'relatorios',
+    'as' => 'relatorios.',
+    'prefix' => 'relatorios'
+], function () {
+    Route::get('/', [RelatorioController::class, 'index'])
+        ->name('index');
+    Route::get('/{codigo}', [RelatorioController::class, 'show'])
+        ->name('show');
+    Route::post('/{codigo}', [RelatorioController::class, 'gerar'])
+        ->name('gerar');
+    Route::post('/{codigo}/export', [RelatorioController::class, 'export'])
+    ->name('export');
 });
 
 // Route::group(['middleware' => ['auth'], 'modulo' => 'tesouraria'], function () {

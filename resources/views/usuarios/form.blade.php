@@ -61,6 +61,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @if(isset($model))
                             <div class="row mb-3">
                                 @foreach($modulos as $key => $modulo)
                                 <div class="col-md-3 mt-3">
@@ -85,6 +86,7 @@
                                 </div>
                                 @endforeach
                             </div>
+                            @endif
                             <button class="btn btn-success">
                                 <i class='fas fa-save'></i>
                                 {{(isset($model) ? 'Atualizar' : 'Cadastrar')}}
@@ -102,7 +104,7 @@
     </div>
 @stop
 @push('js')
-
+@if(isset($model))
 <script>
 $('input[name="modulo"]').on('change', function () {
     let valor = $(this).val();
@@ -125,4 +127,5 @@ $('input[name="modulo"]').on('change', function () {
     })
 })
 </script>
+@endif
 @endpush
