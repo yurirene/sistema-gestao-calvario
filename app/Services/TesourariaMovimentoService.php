@@ -103,7 +103,6 @@ class TesourariaMovimentoService
             $categoria = TesourariaMovimento::find($id);
             $categoria->delete();
         } catch (\Throwable $th) {
-            dd($th->getMessage());
             throw $th;
         }
     }

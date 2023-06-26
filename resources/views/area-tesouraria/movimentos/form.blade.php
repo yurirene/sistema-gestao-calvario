@@ -34,6 +34,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         {!! Form::label('tipo', 'Tipo') !!}
+                                        <span class="text-danger">*</span>
                                         {!! Form::select(
                                             'tipo',
                                             $tipos,
@@ -45,6 +46,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         {!! Form::label('categoria_id', 'Categoria') !!}
+                                        <span class="text-danger">*</span>
                                         {!! Form::select(
                                             'categoria_id',
                                             $categorias,
@@ -74,22 +76,24 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         {!! Form::label('descricao', 'Descrição') !!}
+                                        <span class="text-danger">*</span>
                                         {!! Form::text(
                                             'descricao',
                                             null,
-                                            ['class' => 'form-control', 'required'=>false, 'autocomplete' => 'off']
+                                            ['class' => 'form-control', 'required'=>true, 'autocomplete' => 'off']
                                         ) !!}
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         {!! Form::label('valor', 'Valor') !!}
+                                        <span class="text-danger">*</span>
                                         {!! Form::text(
                                             'valor',
                                             null,
                                             [
                                                 'class' => 'form-control isMoneyConvert',
-                                                'required'=>false,
+                                                'required'=>true,
                                                 'autocomplete' => 'off'
                                             ]
                                         )!!}
