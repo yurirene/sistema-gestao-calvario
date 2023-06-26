@@ -100,12 +100,10 @@ class TesourariaMovimentoService
     public static function delete($id): void
     {
         try {
-            $categoria = TesourariaCategoria::find($id);
-            if ($categoria->subcategorias->isNotEmpty()) {
-                throw new Exception("Existem Subcategorias cadastradas", 418);
-            }
+            $categoria = TesourariaMovimento::find($id);
             $categoria->delete();
         } catch (\Throwable $th) {
+            dd($th->getMessage());
             throw $th;
         }
     }
